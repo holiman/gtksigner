@@ -86,7 +86,7 @@ def listingToText(req):
     return list_template.format( metastr=meta, accountlist = accountlist)
 
 newAccount_template = """
--- Listing  details --------------------
+-- Details --------------------
 A request has been made to create a new account, 
 and show the address to the caller. 
 
@@ -189,10 +189,10 @@ class StdIOHandler():
     def ApproveListing(self,req):
         """ Example request
         """
-        approved = question(title="Sign data request",text=listingToText(req), width=500)
+        approved = question(title="Listing request",text=listingToText(req), width=500)
 
         if approved and 'accounts' in req.keys():
-            return {accounts : req['accounts']}
+            return {'accounts' : req['accounts']}
 
         return {'accounts': []}
 
@@ -246,7 +246,7 @@ def connectHandler(cmd, handler):
 def startSigner(path, test=False, handler = StdIOHandler):
 
     dir = os.path.dirname(path)
-    cmd = ["{}/signer".format(dir),
+    cmd = ["{}/clef".format(dir),
         "--4bytedb","{}/4byte.json".format(dir),
         "--stdio-ui","--rpc"]
 
